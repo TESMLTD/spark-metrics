@@ -35,9 +35,11 @@ package org.apache.spark.groupon.metrics
 import com.codahale.metrics._
 import org.apache.spark.{SparkConf, SparkContext}
 import org.scalatest.concurrent.Eventually
-import org.scalatest.{Matchers, BeforeAndAfter, FlatSpec}
+import org.scalatest.BeforeAndAfter
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class MetricsReceiverTest extends FlatSpec with Matchers with BeforeAndAfter with Eventually {
+class MetricsReceiverTest extends AnyFlatSpec with Matchers with BeforeAndAfter with Eventually {
   private val master = "local[2]"
   private val appName = "test"
   private val sparkConf = new SparkConf().setAppName(appName).setMaster(master)
