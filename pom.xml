@@ -40,6 +40,48 @@
         <tag>HEAD</tag>
     </scm>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>Central Repository - Google Mirror</name>
+            <url>https://maven-central.storage-download.googleapis.com/maven2/</url>
+        </repository>
+        <repository>
+            <id>mapr-releases</id>
+            <url>https://repository.mapr.com/maven/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+        <repository>
+            <id>opsd-snapshot</id>
+            <url>s3://repository.opsd.tesm.com/snapshot</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>opsd-release</id>
+            <url>s3://repository.opsd.tesm.com/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <distributionManagement>
         <repository>
             <id>dexda-release</id>
