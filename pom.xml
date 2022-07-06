@@ -105,7 +105,7 @@
         <!-- Dependencies -->
         <dropwizard.version>3.2.6</dropwizard.version>
         <scala.compat.version>2.12</scala.compat.version>
-        <spark.version>2.4.8-mapr-710-dexda-0.0.11-SNAPSHOT</spark.version>
+        <spark.version>2.4.8-mapr-710-dexda-0.0.11</spark.version>
         <jetty.version>9.4.40.v20210413</jetty.version>
         <scalatest.version>3.2.10</scalatest.version>
 
