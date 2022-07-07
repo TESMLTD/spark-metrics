@@ -1,0 +1,16 @@
+language: java
+
+jdk:
+- openjdk11
+
+cache:
+  directories:
+  - "$HOME/.m2/repository/"
+
+notifications:
+  slack:
+    secure: pFdspUKOhXTTS5EI4IwRWixkzw5vf/dz+CRKNRhylPjzhAqdTI8JIZ5snqwjocZyux63DvT2e41GaKGO3xVsNhp5cvoP2OQef3S2FQNJceAvYHpQbuLiwdA+ndoKs8lYU6wI2uUsHSE0CGfT8ia3B6heH8YxYdAMtQsGl3YO0gm5xg4MFYTZYPxSw2uJQYpr5qDIul+QjmiWR7iN2zv6RN5i1Di6fy/oRE4hFh8vlu5X/9Vmp91S376bG9VVCH0OrT1QSqOmcfTC1TaU04z6EugJsAHuVK/3GOSdoRx9ODYrZyDTFFYu69m0F2hjehejDYSRaBQ+5funnrU7Z81mCVz9PO8Y2EzgSLteULh6Jz10HloflzAs14AwUuJ6XxZd+nENIeVFvJUrv6fFdN9vPRKvDmSouNTgdUPCKKEjc9Mx6ZAN70aQSly3rP2yRJ+Y3AAW9jePgsAmgeiR2onlm+BsRFbskhjA72xL6xUNzHZsqjsAe2vUg7BGOreGZ2LkVcgOgqu+FMGdPFnR21vlaJyx7+0VT0/5czEvxCbaTL2gm1OvP1hR9MrVPHJ5a6WMIFOPbO7VVpLTfHX3gpjhrigb5fF0VE6Hh3V7gg0OYxXj5zVoDHBdUmx+jJlmQZPvzBKUfMwxDvqj6slDsT94A7nqWOEM3Ou93x7qi3dj4oc=
+
+script: mvn verify -DskipITs -B --settings settings.xml
+after_success: mvn jar:jar jar:test-jar source:jar source:test-jar deploy:deploy --settings
+  settings.xml

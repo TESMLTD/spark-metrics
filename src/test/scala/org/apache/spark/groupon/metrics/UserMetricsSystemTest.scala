@@ -33,9 +33,10 @@
 package org.apache.spark.groupon.metrics
 
 import org.apache.spark.groupon.metrics.util.SparkContextSetup
-import org.scalatest.{Matchers, FlatSpec}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
-class UserMetricsSystemTest extends FlatSpec with Matchers with SparkContextSetup {
+class UserMetricsSystemTest extends AnyFlatSpec with Matchers with SparkContextSetup {
   override def beforeAll(): Unit = {
     super.beforeAll()
     UserMetricsSystem.initialize(sc)
