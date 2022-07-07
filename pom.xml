@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.groupon.dse</groupId>
-    <artifactId>spark-metrics_2.12</artifactId>
+    <artifactId>spark-metrics</artifactId>
     <packaging>jar</packaging>
-    <version>2.0.1-dexda-SNAPSHOT</version>
+    <version>2.0.1-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>A library to expose more of Apache Spark's metrics system</description>
@@ -40,90 +40,43 @@
         <tag>HEAD</tag>
     </scm>
 
-    <repositories>
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>Central Repository - Google Mirror</name>
-            <url>https://maven-central.storage-download.googleapis.com/maven2/</url>
-        </repository>
-        <repository>
-            <id>mapr-releases</id>
-            <url>https://repository.mapr.com/maven/</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
-        <repository>
-            <id>opsd-snapshot</id>
-            <url>s3://repository.opsd.tesm.com/snapshot</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>opsd-release</id>
-            <url>s3://repository.opsd.tesm.com/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <distributionManagement>
-        <repository>
-            <id>dexda-release</id>
-            <name>Dexda Release Repository</name>
-            <url>s3://repository.opsd.tesm.com/release</url>
-        </repository>
         <snapshotRepository>
-            <id>dexda-snapshot</id>
-            <name>Dexda Snapshot Repository</name>
-            <url>s3://repository.opsd.tesm.com/snapshot</url>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
     </distributionManagement>
 
     <parent>
         <groupId>org.basepom</groupId>
         <artifactId>basepom-oss</artifactId>
-        <version>40</version>
+        <version>18</version>
     </parent>
 
     <properties>
         <!-- Dependencies -->
-        <dropwizard.version>3.2.6</dropwizard.version>
-        <scala.compat.version>2.12</scala.compat.version>
-        <spark.version>2.4.8-mapr-710-dexda-0.0.11</spark.version>
-        <jetty.version>9.4.40.v20210413</jetty.version>
-        <scalatest.version>3.2.10</scalatest.version>
+        <dropwizard.version>3.1.2</dropwizard.version>
+        <scala.compat.version>2.11</scala.compat.version>
+        <spark.version>2.0.1</spark.version>
+        <jetty.version>8.1.14.v20131031</jetty.version>
+        <scalatest.version>2.2.6</scalatest.version>
 
         <!-- Plugins -->
         <dep.plugin.scalatest-maven-plugin.version>1.0</dep.plugin.scalatest-maven-plugin.version>
         <dep.plugin.scalastyle-maven-plugin.version>0.6.0</dep.plugin.scalastyle-maven-plugin.version>
 
         <!-- Basepom Overrides -->
-        <dep.scala.version>2.12.10</dep.scala.version>
+        <dep.scala.version>2.11.8</dep.scala.version>
         <dep.plugin.scala.version>3.2.2</dep.plugin.scala.version>
-        <scala-maven-plugin.version>4.3.0</scala-maven-plugin.version>
-
         <basepom.release.push-changes>true</basepom.release.push-changes>
         <basepom.check.fail-duplicate-finder>false</basepom.check.fail-duplicate-finder>
         <basepom.check.fail-findbugs>false</basepom.check.fail-findbugs>
         <basepom.oss.skip-scala-doc>false</basepom.oss.skip-scala-doc>
-        <project.build.systemJdk>11</project.build.systemJdk>
-        <project.build.targetJdk>11</project.build.targetJdk>
+        <project.build.targetJdk>1.8</project.build.targetJdk>
     </properties>
 
     <build>
@@ -131,7 +84,6 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>${scala-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>scala-compile-first</id>
@@ -244,13 +196,6 @@
                         <releaseProfiles>basepom.oss-release</releaseProfiles>
                     </configuration>
                 </plugin>
-                <plugin>
-                  <groupId>com.github.spotbugs</groupId>
-                  <artifactId>spotbugs-maven-plugin</artifactId>
-                  <configuration>
-                    <skip>true</skip>
-                  </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -270,14 +215,14 @@
 
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-core_${scala.compat.version}</artifactId>
+            <artifactId>spark-core_2.11</artifactId>
             <version>${spark.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_${scala.compat.version}</artifactId>
+            <artifactId>spark-streaming_2.11</artifactId>
             <version>${spark.version}</version>
             <scope>provided</scope>
 
@@ -309,7 +254,7 @@
 
         <dependency>
             <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_${scala.compat.version}</artifactId>
+            <artifactId>scalatest_2.11</artifactId>
             <scope>test</scope>
             <version>${scalatest.version}</version>
             <exclusions>
@@ -319,43 +264,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest-shouldmatchers_${scala.compat.version}</artifactId>
-            <scope>test</scope>
-            <version>${scalatest.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest-compatible</artifactId>
-            <scope>test</scope>
-            <version>${scalatest.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest-flatspec_${scala.compat.version}</artifactId>
-            <scope>test</scope>
-            <version>${scalatest.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest-core_${scala.compat.version}</artifactId>
-            <scope>test</scope>
-            <version>${scalatest.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest-matchers-core_${scala.compat.version}</artifactId>
-            <scope>test</scope>
-            <version>${scalatest.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.scalactic</groupId>
-            <artifactId>scalactic_${scala.compat.version}</artifactId>
-            <scope>test</scope>
-            <version>${scalatest.version}</version>
-        </dependency>
-
     </dependencies>
 
 </project>

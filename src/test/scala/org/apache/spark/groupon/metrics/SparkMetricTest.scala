@@ -33,16 +33,15 @@
 package org.apache.spark.groupon.metrics
 
 import java.util.concurrent.TimeUnit
-import org.apache.spark.groupon.metrics.util.{SparkContextSetup, TestMetricsRpcEndpoint}
+
+import org.apache.spark.groupon.metrics.util.{TestMetricsRpcEndpoint, SparkContextSetup}
 import org.apache.spark.rpc.RpcEndpointRef
 import org.scalatest.concurrent.Eventually
-import org.scalatest.BeforeAndAfter
-import org.scalatest.flatspec.AnyFlatSpec
-import org.scalatest.matchers.should.Matchers
+import org.scalatest.{Matchers, BeforeAndAfter, FlatSpec}
 
 import scala.util.Random
 
-class SparkMetricTest extends AnyFlatSpec with Matchers with BeforeAndAfter with Eventually with SparkContextSetup {
+class SparkMetricTest extends FlatSpec with Matchers with BeforeAndAfter with Eventually with SparkContextSetup {
   var metricsEndpoint: TestMetricsRpcEndpoint = _
   var metricsEndpointRef: RpcEndpointRef = _
 
